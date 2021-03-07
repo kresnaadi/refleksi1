@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+public class TugasRefleksi1 {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+
+    // Soal Nomor 5: Spelling number in Bahasa
+    String angkaStr = "0";
+
+    // while (!(angkaStr.equals("0"))) {
+      System.out.print("Masukkan angka: ");
+      angkaStr = input.nextLine();
+
+      int angkaInt = Integer.parseInt(angkaStr);
+      int tempAngka, tempAngka3Digit, panjangAngka, panjangAngka3Digit; // some temp vars
+      int tempAngka2Digit; // used for check belasan
+      int i1 = 1, i3 = 1; // used for iteration per digit and per 3 digits
+      int maxIter3, maxIter1;
+      String tempHuruf;
+      boolean isThereBelasan = false;
+
+      panjangAngka = angkaStr.length();
+      maxIter3 = panjangAngka/3 + 1;
+
+      for (i3; i3 <= maxIter3; i3++) {
+        tempAngka2Digit = angkaInt % 100;
+
+        if (tempAngka2Digit >= 10 && tempAngka2Digit < 20) {
+          switch (tempAngka2Digit) {
+            case 10: tempHuruf = "sepuluh"; break;
+            case 11: tempHuruf = "sebelas"; break;
+            case 12: tempHuruf = "dua belas"; break;
+            case 13: tempHuruf = "tiga belas"; break;
+            case 14: tempHuruf = "empat belas"; break;
+            case 15: tempHuruf = "lima belas"; break;
+            case 16: tempHuruf = "enam belas"; break;
+            case 17: tempHuruf = "tujuh belas"; break;
+            case 18: tempHuruf = "delapan belas"; break;
+            case 19: tempHuruf = "sembilan belas"; break;
+          }
+  
+          i1 = 3;
+          isThereBelasan = true;
+        }
+
+        // ambil angka per 3 digits
+        tempAngka3Digit = angkaInt % 1000; // partially looping for every 3 digits
+        panjangAngka3Digit = Integer.toString(tempAngka3Digit).length();
+        
+        switch (i3) {
+          case 1: tempHuruf = "" + tempHuruf; break;
+          case 2: tempHuruf = "ribu " + tempHuruf; break;
+          case 3: tempHuruf = "juta " + tempHuruf; break;
+        }
+        
+        for (i1; i1 <= panjangAngka3Digit; i1++) {
+          tempAngka = tempAngka3Digit % 10;
+
+          if (isThereBelasan) {
+            tempAngka = tempAngka3Digit/100;
+          }
+          
+          switch (i1) {
+            case 1: tempHuruf = "" + tempHuruf; break;
+            case 2: tempHuruf = "puluh " + tempHuruf; break;
+            case 3: tempHuruf = "ratus " + tempHuruf; break;
+          }
+
+          switch (tempAngka) {
+            case 1: tempHuruf = "se" + tempHuruf; break;
+            case 2: tempHuruf = "dua " + tempHuruf; break;
+            case 3: tempHuruf = "tiga " + tempHuruf; break;
+            case 4: tempHuruf = "empat " + tempHuruf; break;
+            case 5: tempHuruf = "lima " + tempHuruf; break;
+            case 6: tempHuruf = "enam " + tempHuruf; break;
+            case 7: tempHuruf = "tujuh " + tempHuruf; break;
+            case 8: tempHuruf = "delapan " + tempHuruf; break;
+            case 9: tempHuruf = "sembilan " + tempHuruf; break;
+          }
+
+          tempAngka3Digit /= 10;
+        }
+
+        angkaInt /= 1000; i1 = 1; isThereBelasan = false;
+      }
+    }
+  }
+}
